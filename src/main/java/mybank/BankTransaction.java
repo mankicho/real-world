@@ -2,6 +2,7 @@ package mybank;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 public class BankTransaction {
     private LocalDate date;
@@ -14,7 +15,34 @@ public class BankTransaction {
         this.description = description;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public String toString() {
         return this.date + "," + this.amount + "," + description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankTransaction that = (BankTransaction) o;
+        return Double.compare(that.amount, amount) == 0 &&
+                date.equals(that.date) &&
+                description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, amount, description);
     }
 }
