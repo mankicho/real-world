@@ -1,5 +1,6 @@
 package mybank;
 
+import mybank.extension.SummaryStatistics;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,30 +33,4 @@ public class BankStatementCSVParserTest {
         Assert.assertEquals(expected.getDescription(), result.getDescription());
     }
 
-    @Test
-    public void findMaxAndMinTransactionTest() throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate start = LocalDate.parse("30-01-2017", formatter);
-        LocalDate end = LocalDate.parse("05-02-2017",formatter);
-
-        BankTransaction expectedMax = new BankTransaction(
-                LocalDate.parse("01-02-2017",formatter), 6000, "Salary");
-        BankTransaction expectedMin = new BankTransaction(
-                LocalDate.parse("02-02-2017",formatter), -4000, "Rent");
-
-        Path path = Paths.get("src/test/java/resources/bank-data-simple.csv");
-        List<String> lines = Files.readAllLines(path);
-
-        BankStatementProcessor processor = new BankStatementProcessor(parser.parseLinesFrom(lines));
-
-        BankTransaction maxResult = processor.findMaxAmountTransaction(start, end);
-        BankTransaction minResult = processor.findMinAmountTransaction(start, end);
-
-        Assert.assertEquals(maxResult, expectedMax);
-        Assert.assertEquals(minResult, expectedMin);
-    }
-
-    public void findMinTransactionTest() {
-
-    }
 }
