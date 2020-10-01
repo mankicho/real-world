@@ -14,9 +14,7 @@ public class MainApplication {
         system.importFile(resourcesDir + "patient.invoice");
         system.importFile(resourcesDir + "patient.letter");
         system.importFile(resourcesDir + "patient.report");
-//        system.importFile(resourcesDir + "xray.jpg");
-
-        System.out.println("---");
+        system.importFile(resourcesDir + "xray.jpg");
 
         List<Document> result = system.search("patient:Joe Bloggs,body:Diet Coke");
 

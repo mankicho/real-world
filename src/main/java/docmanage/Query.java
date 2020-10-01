@@ -25,6 +25,9 @@ public class Query implements Predicate<Document> {
         return clauses.entrySet().stream().allMatch(entry -> {
             final String documentBody = document.getAttribute(entry.getKey());
             final String queryValue = entry.getValue();
+            if (documentBody == null) {
+                return false;
+            }
             return documentBody.contains(queryValue);
         });
     }
